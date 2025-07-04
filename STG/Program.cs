@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("you stupid nigger67");
+            Console.WriteLine("you stupid 67 niggers");
         }
     }
 }
