@@ -17,16 +17,16 @@ namespace STG
         public string CorrectAnswer { get; set; }
 
 
+        
 
-
-        static void Main()
+        public static void TestExtractor()
         {
-            string filePath = "test.txt";
+            string filePath = "../../../tiktok_meme_test_40.txt";
             List<test> tests = new List<test>();
             foreach (string line in File.ReadLines(filePath))
             {
                 string[] parts = line.Split('^');
-                if (parts.Length != 7)
+                if (parts.Length == 7)
                 {
                     test i = new test
                     {
@@ -40,6 +40,17 @@ namespace STG
                     };
                     tests.Add(i);
                 }
+            }
+            foreach (var test in tests)
+            {
+                Console.WriteLine(test.ID);
+                Console.WriteLine(test.QuestionText);
+                Console.WriteLine(test.Answer1);
+                Console.WriteLine(test.Answer2);
+                Console.WriteLine(test.Answer3);
+                Console.WriteLine(test.Answer4);
+                Console.WriteLine(test.CorrectAnswer);
+                Console.WriteLine();
             }
         }
     }
