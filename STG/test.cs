@@ -28,7 +28,7 @@ namespace STG
                 string[] parts = line.Split('^');
                 if (parts.Length == 7)
                 {
-                    test i = new test
+                     test i = new test
                     {
                         ID = int.Parse(parts[0]),
                         QuestionText = parts[1],
@@ -41,16 +41,28 @@ namespace STG
                     tests.Add(i);
                 }
             }
-            foreach (var test in tests)
+
+            Console.Write("Колко теста искате да бъдат направени: " );
+            int numberOfQuestions = int.Parse(Console.ReadLine());
+
+            Random random = new Random();
+
+            for (int i = 0; i < numberOfQuestions; i++)
             {
-                Console.WriteLine(test.ID);
-                Console.WriteLine(test.QuestionText);
-                Console.WriteLine(test.Answer1);
-                Console.WriteLine(test.Answer2);
-                Console.WriteLine(test.Answer3);
-                Console.WriteLine(test.Answer4);
-                Console.WriteLine(test.CorrectAnswer);
-                Console.WriteLine();
+                int randomIndex = random.Next(tests.Count);
+
+                test selectedTest = tests[randomIndex];
+                using (StreamWriter write = new StreamWriter($"../../../test_{i + 1}.txt"))
+                {
+                    write.WriteLine($"Тест {i + 1}");
+                    write.WriteLine($"Въпрос: {selectedTest.QuestionText}");
+                    write.WriteLine($"1. {selectedTest.Answer1}");
+                    write.WriteLine($"2. {selectedTest.Answer2}");
+                    write.WriteLine($"3. {selectedTest.Answer3}");
+                    write.WriteLine($"4. {selectedTest.Answer4}");
+                    write.WriteLine($"Правилен отговор: {selectedTest.CorrectAnswer}");
+                    write.WriteLine();
+                }
             }
         }
     }
