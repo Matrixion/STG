@@ -1,8 +1,5 @@
-Тест 3
-Въпрос: Коя фраза се свързва със странни неща?
-1. GYATT
-2. Only in Ohio
-3. Sigma grindset
-4. Slay queen
-Правилен отговор: Only in Ohio
-
+1^Кой е най-често срещан TikTok филтър?^Disney face^Bald head^Baby face^Bold glamour^Bold glamour
+2^Коя фраза често се ползва с ирония?^That’s so deep^Slay^Love that^Great idea^Slay
+3^Какво се случва в „Trend Alert“?^Пускат нов сериал^Започва нов вайръл формат^Премиера на филм^Бан^Започва нов вайръл формат
+4^Завърши фразата: „Delulu is the ___“^confusion^problem^solulu^trollu^solulu
+5^Какво значи „mid“?^Супер^Средна работа/нищо особено^Уникално^Чист провал^Средна работа/нищо особено
