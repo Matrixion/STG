@@ -47,7 +47,38 @@ namespace STG
             }
             return questions;
         }
-        public static void CreateTests(int numberOfTests, int questionCount)
+
+        public static void CreateDifferentTests(int numberOfTests)
+        {
+            Random random = new Random();
+
+            for (int i = 1; i <= numberOfTests; i++)
+            {
+                List<int> usedNumbers = new List<int>();
+                string newfilepath = $"../../../test_{i}.txt";
+                List<string> lines = new List<string>();
+                Console.WriteLine($"Колко въпроса искате да съдържа тест {i}: ");
+                int questionCount = int.Parse(Console.ReadLine());
+
+                for (int j = 1; j <= questionCount; j++)
+                {
+                    int randomIndex = random.Next(Question.Test.Count);
+
+                    if (usedNumbers.Contains(randomIndex)) j--;
+                    else
+                    {
+                        Question selectedQuestion = Question.Test[randomIndex];
+                        string line = selectedQuestion.ToCsvString(j);
+                        lines.Add(line);
+                        usedNumbers.Add(randomIndex);
+                    }
+                }
+
+                File.WriteAllLines(newfilepath, lines);
+            }
+        }
+
+        public static void CreateTestsSameLength(int numberOfTests, int questionCount)
         {
             Random random = new Random();
 
@@ -64,8 +95,8 @@ namespace STG
                     if (usedNumbers.Contains(randomIndex)) j--;
                     else
                     {
-                        Question selectedTest = Question.Test[randomIndex];
-                        string line = selectedTest.ToCsvString(j);
+                        Question selectedQuestion = Question.Test[randomIndex];
+                        string line = selectedQuestion.ToCsvString(j);
                         lines.Add(line);
                         usedNumbers.Add(randomIndex);
                     }

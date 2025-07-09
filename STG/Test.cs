@@ -8,35 +8,41 @@ namespace STG
 {
     internal class Test
     {
-        static void StartTest(List<Question> test)
+        public static void StartTest(List<Question> test)
         {
             int count = 0;
             int questions = test.Count;
-            foreach (Question q in test)
+            for (int i = 0; i < questions; i++)
             {
-                Console.WriteLine(q.QuestionText);
+                Console.WriteLine($"Въпрос {i + 1}/{test.Count}: {test[i].QuestionText}");
                 Console.WriteLine();
-                Console.WriteLine("1. " + q.Answers[0]);
-                Console.WriteLine("2. " + q.Answers[1]);
-                Console.WriteLine("3. " + q.Answers[2]);
-                Console.WriteLine("4. " + q.Answers[3]);
+                Console.WriteLine("1. " + test[i].Answers[0]);
+                Console.WriteLine("2. " + test[i].Answers[1]);
+                Console.WriteLine("3. " + test[i].Answers[2]);
+                Console.WriteLine("4. " + test[i].Answers[3]);
                 Console.WriteLine();
-                Console.Write("Твой отговор: ");
+                Console.Write("Твойят отговор: ");
                 int answer = int.Parse(Console.ReadLine());
+                Console.WriteLine();
 
-                if (answer == q.CorrectAnswer)
+                if (answer == test[i].CorrectAnswer)
                 {
-                    Console.WriteLine("Това е правилния отговор!");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Това е правилният отговор!");
+                    Console.ForegroundColor = ConsoleColor.White;
                     count++;
                 }
                 else
                 {
-                    Console.WriteLine($"Това е грешен отговор! Правилния беше {q.CorrectAnswer}: {q.Answers[q.CorrectAnswer]}");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"Това е грешен отговор! Правилният беше {test[i].CorrectAnswer}: {test[i].Answers[test[i].CorrectAnswer-1]}");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
-                Console.WriteLine();
+
+                Program.CreateLine();
             }
 
-            Console.WriteLine($"Общ брой точки: {count}");
+            Console.WriteLine($"Общ брой точки: {count}/{test.Count}");
         }
     }
 }
