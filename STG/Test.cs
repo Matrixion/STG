@@ -10,8 +10,11 @@ namespace STG
     {
         public static void StartTest(List<Question> test)
         {
-            int count = 0;
+            double count = 0;
             int questions = test.Count;
+            Console.Write("Какво е твоето име: ");
+            string name = Console.ReadLine();
+            Console.WriteLine();
             for (int i = 0; i < questions; i++)
             {
                 Console.WriteLine($"Въпрос {i + 1}/{test.Count}: {test[i].QuestionText}");
@@ -41,8 +44,8 @@ namespace STG
 
                 Program.CreateLine();
             }
-
-            Console.WriteLine($"Общ брой точки: {count}/{test.Count}");
+            Console.WriteLine($"{name} имаш {count}/{test.Count} точки");
+            Console.WriteLine("Оценка: "+(((count * 4) / test.Count )+ 2));
         }
     }
 }

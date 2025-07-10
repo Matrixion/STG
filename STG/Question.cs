@@ -24,10 +24,34 @@ namespace STG
             Answers = answers;
             CorrectAnswer = correctAnswer;
         }
-
-        public string ToCsvString(int id)
+        public void MixAnswers()
         {
+            Random random = new Random();
+            string correctText = Answers[CorrectAnswer - 1];
+            Answers = Answers.OrderBy(x => random.Next()).ToArray();
+            CorrectAnswer = Array.IndexOf(Answers, correctText) + 1;
+        }
+
+        public string ToCsvStringReadable(int id)
+        {
+            
             string CsvInfo = $"{id}^{QuestionText}^{Answers[0]}^{Answers[1]}^{Answers[2]}^{Answers[3]}^{CorrectAnswer}";
+            return CsvInfo;
+        }
+
+        public string [] ToCsvString(int id)
+        {
+           
+            string[] CsvInfo = new string[] {
+                "Въпрос:"+id.ToString(),
+                QuestionText,
+                "1)"+Answers[0],
+                "2)"+Answers[1],
+                "3)"+Answers[2],
+                "4)"+Answers[3],
+                CorrectAnswer.ToString(),
+                " "
+            };
             return CsvInfo;
         }
     }

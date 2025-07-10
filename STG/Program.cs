@@ -16,7 +16,8 @@
                 Console.WriteLine("2. Играене на тест");
                 Console.WriteLine("3. Излизане от програмата");
                 Console.WriteLine();
-                Console.Write("Какво действие искате да извършвате: ");
+                Console.Write("Изберете едно действие от изброените отгоре: ");
+
                 int option = int.Parse(Console.ReadLine());
                 CreateLine();
 
@@ -25,7 +26,7 @@
                     Console.WriteLine("1. Всички с една и съща дължина");
                     Console.WriteLine("2. Всички с различни дължини");
                     Console.WriteLine();
-                    Console.Write("Какво действие искате да извършвате: ");
+                    Console.Write("Изберете едно действие от изброените отгоре: ");
                     option = int.Parse(Console.ReadLine());
                     CreateLine();
 

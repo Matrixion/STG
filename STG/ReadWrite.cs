@@ -30,7 +30,7 @@ namespace STG
 
         public static List<Question> ExtractTest(int test)
         {
-            string filePath = $"../../../test_{test}.txt";
+            string filePath = $"../../../test_readable_{test}.txt";
             List<Question> questions = new List<Question>();
             foreach (string line in File.ReadLines(filePath))
             {
@@ -55,8 +55,19 @@ namespace STG
             for (int i = 1; i <= numberOfTests; i++)
             {
                 List<int> usedNumbers = new List<int>();
+
+                string newfilepath_readable = $"../../../test_readable_{i}.txt";
                 string newfilepath = $"../../../test_{i}.txt";
+
                 List<string> lines = new List<string>();
+                List<string> csvLines = new List<string>();
+
+                csvLines.Add($"ТЕСТ {i}");
+                csvLines.Add($" ");
+                csvLines.Add($"ИМЕ:                                       Клас:");
+                csvLines.Add($" ");
+
+
                 Console.WriteLine($"Колко въпроса искате да съдържа тест {i}: ");
                 int questionCount = int.Parse(Console.ReadLine());
 
@@ -68,13 +79,23 @@ namespace STG
                     else
                     {
                         Question selectedQuestion = Question.Test[randomIndex];
-                        string line = selectedQuestion.ToCsvString(j);
-                        lines.Add(line);
+                        selectedQuestion.MixAnswers();
+
+                        string line1 = selectedQuestion.ToCsvStringReadable(j);
+                        lines.Add(line1);
+
+                        string [] line2 = selectedQuestion.ToCsvString(j);
+                        foreach (string s in line2)
+                        {
+                            csvLines.Add(s);
+                        }
                         usedNumbers.Add(randomIndex);
+                        
                     }
                 }
 
-                File.WriteAllLines(newfilepath, lines);
+                File.WriteAllLines(newfilepath_readable, lines);
+                File.WriteAllLines(newfilepath, csvLines);
             }
         }
 
@@ -85,8 +106,17 @@ namespace STG
             for (int i = 1; i <= numberOfTests; i++)
             {
                 List<int> usedNumbers = new List<int>();
-                string newfilepath = $"../../../test_{i}.txt";
                 List<string> lines = new List<string>();
+                List<string> csvLines = new List<string>();
+
+                csvLines.Add($"ТЕСТ {i}");
+                csvLines.Add($" ");
+                csvLines.Add($"ИМЕ:                                       Клас:");
+                csvLines.Add($" ");
+
+                string newfilepath_readable = $"../../../test_readable_{i}.txt";
+                string newfilepath = $"../../../test_{i}.txt";
+               
 
                 for (int j = 1; j <= questionCount; j++)
                 {
@@ -96,13 +126,24 @@ namespace STG
                     else
                     {
                         Question selectedQuestion = Question.Test[randomIndex];
-                        string line = selectedQuestion.ToCsvString(j);
+                        selectedQuestion.MixAnswers();
+
+                        string line = selectedQuestion.ToCsvStringReadable(j);
                         lines.Add(line);
+
+                        usedNumbers.Add(randomIndex);
+
+                        string[] line2 = selectedQuestion.ToCsvString(j);
+                        foreach (string s in line2)
+                        {
+                            csvLines.Add(s);
+                        }
                         usedNumbers.Add(randomIndex);
                     }
                 }
 
-                File.WriteAllLines(newfilepath, lines);
+                File.WriteAllLines(newfilepath_readable, lines);
+                File.WriteAllLines(newfilepath, csvLines);
             }
         }
 
