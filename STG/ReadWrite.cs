@@ -54,48 +54,51 @@ namespace STG
 
             for (int i = 1; i <= numberOfTests; i++)
             {
-                List<int> usedNumbers = new List<int>();
-
-                string newfilepath_readable = $"../../../test_readable_{i}.txt";
-                string newfilepath = $"../../../test_{i}.txt";
-
-                List<string> lines = new List<string>();
-                List<string> csvLines = new List<string>();
-
-                csvLines.Add($"ТЕСТ {i}");
-                csvLines.Add($" ");
-                csvLines.Add($"ИМЕ:                                       Клас:");
-                csvLines.Add($" ");
-
-
-                Console.WriteLine($"Колко въпроса искате да съдържа тест {i}: ");
-                int questionCount = int.Parse(Console.ReadLine());
-
-                for (int j = 1; j <= questionCount; j++)
+                if (FindExistingTest(i))
                 {
-                    int randomIndex = random.Next(Question.Test.Count);
+                    List<int> usedNumbers = new List<int>();
 
-                    if (usedNumbers.Contains(randomIndex)) j--;
-                    else
+                    string newfilepath_readable = $"../../../test_readable_{i}.txt";
+                    string newfilepath = $"../../../test_{i}.txt";
+
+                    List<string> lines = new List<string>();
+                    List<string> csvLines = new List<string>();
+
+                    csvLines.Add($"ТЕСТ {i}");
+                    csvLines.Add($" ");
+                    csvLines.Add($"ИМЕ:                                       Клас:");
+                    csvLines.Add($" ");
+
+
+                    Console.WriteLine($"Колко въпроса искате да съдържа тест {i}: ");
+                    int questionCount = int.Parse(Console.ReadLine());
+
+                    for (int j = 1; j <= questionCount; j++)
                     {
-                        Question selectedQuestion = Question.Test[randomIndex];
-                        selectedQuestion.MixAnswers();
+                        int randomIndex = random.Next(Question.Test.Count);
 
-                        string line1 = selectedQuestion.ToCsvStringReadable(j);
-                        lines.Add(line1);
-
-                        string [] line2 = selectedQuestion.ToCsvString(j);
-                        foreach (string s in line2)
+                        if (usedNumbers.Contains(randomIndex)) j--;
+                        else
                         {
-                            csvLines.Add(s);
-                        }
-                        usedNumbers.Add(randomIndex);
-                        
-                    }
-                }
+                            Question selectedQuestion = Question.Test[randomIndex];
+                            selectedQuestion.MixAnswers();
 
-                File.WriteAllLines(newfilepath_readable, lines);
-                File.WriteAllLines(newfilepath, csvLines);
+                            string line1 = selectedQuestion.ToCsvStringReadable(j);
+                            lines.Add(line1);
+
+                            string[] line2 = selectedQuestion.ToCsvString(j);
+                            foreach (string s in line2)
+                            {
+                                csvLines.Add(s);
+                            }
+                            usedNumbers.Add(randomIndex);
+
+                        }
+                    }
+
+                    File.WriteAllLines(newfilepath_readable, lines);
+                    File.WriteAllLines(newfilepath, csvLines);
+                }
             }
         }
 
@@ -105,47 +108,70 @@ namespace STG
 
             for (int i = 1; i <= numberOfTests; i++)
             {
-                List<int> usedNumbers = new List<int>();
-                List<string> lines = new List<string>();
-                List<string> csvLines = new List<string>();
-
-                csvLines.Add($"ТЕСТ {i}");
-                csvLines.Add($" ");
-                csvLines.Add($"ИМЕ:                                       Клас:");
-                csvLines.Add($" ");
-
-                string newfilepath_readable = $"../../../test_readable_{i}.txt";
-                string newfilepath = $"../../../test_{i}.txt";
-               
-
-                for (int j = 1; j <= questionCount; j++)
+                if (FindExistingTest(i))
                 {
-                    int randomIndex = random.Next(Question.Test.Count);
+                    List<int> usedNumbers = new List<int>();
+                    List<string> lines = new List<string>();
+                    List<string> csvLines = new List<string>();
 
-                    if (usedNumbers.Contains(randomIndex)) j--;
-                    else
+                    csvLines.Add($"ТЕСТ {i}");
+                    csvLines.Add($" ");
+                    csvLines.Add($"ИМЕ:                                       Клас:");
+                    csvLines.Add($" ");
+
+                    string newfilepath_readable = $"../../../test_readable_{i}.txt";
+                    string newfilepath = $"../../../test_{i}.txt";
+
+
+                    for (int j = 1; j <= questionCount; j++)
                     {
-                        Question selectedQuestion = Question.Test[randomIndex];
-                        selectedQuestion.MixAnswers();
+                        int randomIndex = random.Next(Question.Test.Count);
 
-                        string line = selectedQuestion.ToCsvStringReadable(j);
-                        lines.Add(line);
-
-                        usedNumbers.Add(randomIndex);
-
-                        string[] line2 = selectedQuestion.ToCsvString(j);
-                        foreach (string s in line2)
+                        if (usedNumbers.Contains(randomIndex)) j--;
+                        else
                         {
-                            csvLines.Add(s);
-                        }
-                        usedNumbers.Add(randomIndex);
-                    }
-                }
+                            Question selectedQuestion = Question.Test[randomIndex];
+                            selectedQuestion.MixAnswers();
 
-                File.WriteAllLines(newfilepath_readable, lines);
-                File.WriteAllLines(newfilepath, csvLines);
+                            string line = selectedQuestion.ToCsvStringReadable(j);
+                            lines.Add(line);
+
+                            usedNumbers.Add(randomIndex);
+
+                            string[] line2 = selectedQuestion.ToCsvString(j);
+                            foreach (string s in line2)
+                            {
+                                csvLines.Add(s);
+                            }
+                            usedNumbers.Add(randomIndex);
+                        }
+                    }
+
+                    File.WriteAllLines(newfilepath_readable, lines);
+                    File.WriteAllLines(newfilepath, csvLines);
+                }
             }
         }
 
+        public static bool FindExistingTest(int test)
+        {
+            if (File.Exists($"../../../test_{test}.txt"))
+            {
+                Console.WriteLine();
+                Console.WriteLine($"test_{test}.txt вече съществува. Искате ли да презапишете файла?");
+                Console.WriteLine();
+                Console.WriteLine("1. ДА");
+                Console.WriteLine("2. НЕ");
+                Console.WriteLine();
+                Console.Write("Отговор: ");
+                int answer = int.Parse(Console.ReadLine());
+
+                if (answer == 1) return true;
+                else if (answer == 2) return false;
+                else FindExistingTest(test);
+            }
+
+            return false;
+        }
     }
 }

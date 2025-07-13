@@ -6,9 +6,16 @@
         {
             ReadWrite.TestExtractor();
 
-            //дизайн
-            //избиране на рандом тест
-            //избор за изтриване на файлове
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("\r\n  _______        _      _____                           _             " +
+                "\r\n |__   __|      | |    / ____|                         | |            " +
+                "\r\n    | | ___  ___| |_  | |  __  ___ _ __   ___ _ __ __ _| |_ ___  _ __ " +
+                "\r\n    | |/ _ \\/ __| __| | | |_ |/ _ \\ '_ \\ / _ \\ '__/ _` | __/ _ \\| '__|" +
+                "\r\n    | |  __/\\__ \\ |_  | |__| |  __/ | | |  __/ | | (_| | || (_) | |   " +
+                "\r\n    |_|\\___||___/\\__|  \\_____|\\___|_| |_|\\___|_|  \\__,_|\\__\\___/|_|   " +
+                "\r\n                                                                      " +
+                "\r\n                                                                      \r\n");
+            Console.ForegroundColor= ConsoleColor.White;
 
             while (true)
             {
@@ -74,7 +81,9 @@
         public static void CreateLine()
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("-------------------------------------------------------------------------");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
     }
