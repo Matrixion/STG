@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             ReadWrite.TestExtractor();
+            // извлича тестовете от файла и ги записва в списъка Question.Test
 
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\r\n  _______        _      _____                           _             " +
@@ -18,6 +19,7 @@
             Console.ForegroundColor= ConsoleColor.White;
 
             while (true)
+            //докато не излезе от програмата ще се върти цикълът
             {
                 Console.WriteLine("1. Създаване на тестове");
                 Console.WriteLine("2. Играене на тест");
@@ -29,6 +31,7 @@
                 CreateLine();
 
                 if (option == 1)
+                // ако избере 1 ще се създават тестове
                 {
                     Console.WriteLine("1. Всички с една и съща дължина");
                     Console.WriteLine("2. Всички с различни дължини");
@@ -38,6 +41,7 @@
                     CreateLine();
 
                     if (option == 1)
+                    // ако избере 1 ще се създават тестове с една и съща дължина
                     {
                         Console.Write("Колко теста искате да бъдат направени: ");
                         int numberOfTests = int.Parse(Console.ReadLine());
@@ -47,6 +51,7 @@
                     }
 
                     else if (option == 2)
+                    // ако избере 2 ще се създават тестове с различна дължина
                     {
                         Console.Write("Колко теста искате да бъдат направени: ");
                         int numberOfTests = int.Parse(Console.ReadLine());
@@ -56,17 +61,20 @@
                 }
 
                 else if (option == 2)
+                // ако избере 2 ще се играят тестове
                 {
                     Console.Write("Какъв тест искате да играете (0 за всички въпроси): ");
                     int test = int.Parse(Console.ReadLine());
                     CreateLine();
 
                     if (test == 0)
+                    // ако избере 0 ще се играят всички въпроси
                     {
                         Test.StartTest(Question.Test);
                     }
 
                     else
+                    // ако избере друг номер, ще се играе само този тест
                     {
                         Test.StartTest(ReadWrite.ExtractTest(test));
                     }
@@ -74,7 +82,7 @@
                     CreateLine();
                 }
 
-                else if (option == 3) break;
+                else if (option == 3) break;// ако избере 3 ще излезе от програмата
             }
         }
 

@@ -12,6 +12,7 @@ namespace STG
         static string _filepath = "../../../tiktok_meme_test_40.txt";
 
         public static void TestExtractor()
+        // извлича въпросите от файла и ги записва в списъка Question.Test
         {
             foreach (string line in File.ReadLines(_filepath))
             {
@@ -29,6 +30,7 @@ namespace STG
         }
 
         public static List<Question> ExtractTest(int test)
+        // извлича теста с номер test от файла test_readable_{test}.txt и го връща като списък от въпроси
         {
             string filePath = $"../../../test_readable_{test}.txt";
             List<Question> questions = new List<Question>();
@@ -49,6 +51,8 @@ namespace STG
         }
 
         public static void CreateDifferentTests(int numberOfTests)
+        // създава различни тестове с различен брой въпроси, като всеки тест съдържа случайно избрани
+        // въпроси от списъка Question.Test
         {
             Random random = new Random();
 
@@ -82,9 +86,10 @@ namespace STG
                         {
                             Question selectedQuestion = Question.Test[randomIndex];
                             selectedQuestion.MixAnswers();
-
+                            
                             string line1 = selectedQuestion.ToCsvStringReadable(j);
                             lines.Add(line1);
+                           
 
                             string[] line2 = selectedQuestion.ToCsvString(j);
                             foreach (string s in line2)
@@ -92,17 +97,18 @@ namespace STG
                                 csvLines.Add(s);
                             }
                             usedNumbers.Add(randomIndex);
-
+                            // добавя въпроса в списъка с въпроси за теста
                         }
                     }
 
-                    File.WriteAllLines(newfilepath_readable, lines);
-                    File.WriteAllLines(newfilepath, csvLines);
+                    File.WriteAllLines(newfilepath_readable, lines);//файлът с четими въпроси за програмата
+                    File.WriteAllLines(newfilepath, csvLines);// txt файл с въпроси на тестове
                 }
             }
         }
 
         public static void CreateTestsSameLength(int numberOfTests, int questionCount)
+        // създава тестове с една и съща дължина, като всеки тест съдържа случайно избрани въпроси от списъка Question.Test
         {
             Random random = new Random();
 
@@ -119,8 +125,8 @@ namespace STG
                     csvLines.Add($"ИМЕ:                                       Клас:");
                     csvLines.Add($" ");
 
-                    string newfilepath_readable = $"../../../test_readable_{i}.txt";
-                    string newfilepath = $"../../../test_{i}.txt";
+                    string newfilepath_readable = $"../../../test_readable_{i}.txt"; //файлът с четими въпроси за програмата
+                    string newfilepath = $"../../../test_{i}.txt";// txt файл с въпроси на тестове
 
 
                     for (int j = 1; j <= questionCount; j++)
@@ -144,16 +150,18 @@ namespace STG
                                 csvLines.Add(s);
                             }
                             usedNumbers.Add(randomIndex);
+                            // добавя въпроса в списъка с въпроси за теста
                         }
                     }
 
-                    File.WriteAllLines(newfilepath_readable, lines);
-                    File.WriteAllLines(newfilepath, csvLines);
+                    File.WriteAllLines(newfilepath_readable, lines);//файлът с четими въпроси за програмата
+                    File.WriteAllLines(newfilepath, csvLines);// txt файл с въпроси на тестове
                 }
             }
         }
 
         public static bool FindExistingTest(int test)
+        // проверява дали файлът test_{test}.txt вече съществува и ако да, пита потребителя дали иска да го презапише
         {
             if (File.Exists($"../../../test_{test}.txt"))
             {

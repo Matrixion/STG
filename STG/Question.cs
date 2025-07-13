@@ -9,8 +9,7 @@ namespace STG
 {
     public class Question
     {
-        //make list
-        //split methods
+        
         public static List<Question> Test { get; set; } = new List<Question>();
         public int ID { get; set; }
         public string QuestionText { get; set; }
@@ -25,6 +24,7 @@ namespace STG
             CorrectAnswer = correctAnswer;
         }
         public void MixAnswers()
+        //разбърква отговорите
         {
             Random random = new Random();
             string correctText = Answers[CorrectAnswer - 1];
@@ -33,16 +33,20 @@ namespace STG
         }
 
         public string ToCsvStringReadable(int id)
+        //превръща въпроса в CSV формат който е четим за програмата и може да се използва за играене на тестове
         {
-            
+
             string CsvInfo = $"{id}^{QuestionText}^{Answers[0]}^{Answers[1]}^{Answers[2]}^{Answers[3]}^{CorrectAnswer}";
             return CsvInfo;
         }
 
         public string [] ToCsvString(int id)
+        //превръща въпроса в CSV формат който не е четим
         {
-           
-            string[] CsvInfo = new string[] {
+
+            string[] CsvInfo = new string[]
+            // създава масив от стрингове който съдържа информацията за въпроса
+            {
                 "Въпрос:"+id.ToString(),
                 QuestionText,
                 "1)"+Answers[0],

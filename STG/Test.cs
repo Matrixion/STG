@@ -9,6 +9,7 @@ namespace STG
     internal class Test
     {
         public static void StartTest(List<Question> test)
+        // започва теста в конзолата с въпросите от списъка test
         {
             double count = 0;
             int questions = test.Count;
